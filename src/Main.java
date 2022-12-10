@@ -12,13 +12,13 @@ public class Main {
             System.out.println((i + 1) + ". " + products[i] + " " + prices[i] + " руб/шт");
         }
 
-        File textFile  = new File("basket.txt");
+        File binFile = new File("basket.bin");
         Basket basket;
-        if (textFile.exists()) {
+        if (binFile.exists()) {
             System.out.println();
             System.out.println("Корзина уже существует...производим загрузку данных");
             System.out.println();
-            basket  = Basket.loadFromTxtFile(textFile);
+            basket = Basket.loadFromBinFile(binFile);
             basket.printCart();
         } else {
             System.out.println("Создаем новую корзину..");
@@ -38,6 +38,6 @@ public class Main {
             basket.addToCart(productNumber, productCount);
         }
         basket.printCart();
-        basket.saveTxt(textFile);
+        basket.saveBin(binFile);
     }
 }
