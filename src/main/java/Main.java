@@ -13,6 +13,8 @@ public class Main {
         }
 
         File textFile  = new File("basket.txt");
+        File csvFile = new File("log.csv");
+        ClientLog clientLog = new ClientLog();
         Basket basket;
         if (textFile.exists()) {
             System.out.println();
@@ -36,8 +38,11 @@ public class Main {
             int productNumber = Integer.parseInt(parts[0]) - 1;
             int productCount = Integer.parseInt(parts[1]);
             basket.addToCart(productNumber, productCount);
+            clientLog.log(productNumber + 1, productCount);
+            clientLog.exportAsCSV(csvFile);
         }
         basket.printCart();
         basket.saveTxt(textFile);
     }
+
 }
