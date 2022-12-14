@@ -1,3 +1,9 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +88,36 @@ public class Basket {
         }
         return null;
     }
+
+    public void saveJSON(File jsonFile) {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        String gsonStr = gson.toJson(this);
+        try (FileWriter writer = new FileWriter(jsonFile)) {
+            writer.write(gsonStr);
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+    }
+
+    public static Basket loadFromJSONFile(File jsonFile) {
+        // чтение JSON и преобразование к строке
+        JSONParser parser = new JSONParser();
+        String jsonString = "";
+        try {
+            Object obj = parser.parse(new FileReader(jsonFile));
+            JSONObject jsonObject = (JSONObject) obj;
+            jsonString = jsonObject.toString();
+        } catch (IOException | ParseException ex) {
+            ex.getMessage();
+        }
+        // процесс преобразования строки JSON в объект
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        Basket basket = gson.fromJson(jsonString, Basket.class);
+        return basket;
+    }
+
 
     public void setProductsCount(int[] productsCount) {
         this.productsCount = productsCount;

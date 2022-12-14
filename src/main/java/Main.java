@@ -12,15 +12,15 @@ public class Main {
             System.out.println((i + 1) + ". " + products[i] + " " + prices[i] + " руб/шт");
         }
 
-        File textFile  = new File("basket.txt");
+        File jsonFile  = new File("basket.json");
         File csvFile = new File("log.csv");
         ClientLog clientLog = new ClientLog();
         Basket basket;
-        if (textFile.exists()) {
+        if (jsonFile.exists()) {
             System.out.println();
             System.out.println("Корзина уже существует...производим загрузку данных");
             System.out.println();
-            basket  = Basket.loadFromTxtFile(textFile);
+            basket  = Basket.loadFromJSONFile(jsonFile);
             basket.printCart();
         } else {
             System.out.println("Создаем новую корзину..");
@@ -42,7 +42,7 @@ public class Main {
             clientLog.exportAsCSV(csvFile);
         }
         basket.printCart();
-        basket.saveTxt(textFile);
+        basket.saveJSON(jsonFile);
     }
 
 }

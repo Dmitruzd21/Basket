@@ -25,7 +25,6 @@ public class ClientLog {
                 s[1] = Integer.toString(clientInput[1]);
                 writer.writeNext(s);
             }
-
         } catch (IOException ex) {
             ex.getMessage();
         }
