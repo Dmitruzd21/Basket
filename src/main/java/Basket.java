@@ -118,7 +118,6 @@ public class Basket {
         return basket;
     }
 
-
     public void setProductsCount(int[] productsCount) {
         this.productsCount = productsCount;
     }
